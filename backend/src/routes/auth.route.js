@@ -1,8 +1,15 @@
 import { Router } from "express";
 import { signup, login, logout, updateProfile } from "../controllers/signup.controller.js";
 import { authMiddleware } from "../middleware/auth.middleware.js";
+import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 
 const router = Router();
+
+router.use(arcjetProtection);
+
+router.get('/test', (req, res) => {
+    res.send("Auth route is working");
+});
 
 router.post('/signup', signup);
 
