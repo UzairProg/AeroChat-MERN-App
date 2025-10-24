@@ -6,7 +6,7 @@ export const signup = async (req, res) => {
     const {fullName, email, password} = req.body;
 
     try{
-        if(!fullName || !email || !password){
+        if(!fullName.trim() || !email.trim() || !password.trim()){
             return res.status(400).json({ message: "All fields are required" });
         }
 
@@ -29,8 +29,8 @@ export const signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUser = User({ // this creates a new user instance but does not save it to the database yet.. in detail it means, it creates a new user object with the provided data
-            email,
-            fullName,
+            email: email.trim().toLowerCase(),
+            fullName: fullName.trim(),
             password: hashedPassword,   
         })
 
