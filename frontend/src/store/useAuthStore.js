@@ -6,6 +6,7 @@ const useAuthStore = create((set) => ({
   authUser: null,
   isAuthenticatedCheck: false,
   isSigningUp: false,
+  isloggingIn: false,
 
   checkUserAuth: async function(){
     try {
@@ -31,6 +32,21 @@ const useAuthStore = create((set) => ({
       toast.error(error.response.data.message)
     } finally{
       set({ isSigningUp: false})
+    }
+  },
+
+  userLogin: async (data) => {
+    set({ isloggingIn: true})
+    try {
+      const res = await axiosInstance.post("/auth/login", data)
+      set({ authUser: res.data })
+
+      toast.success("Logged in successfully!")
+    } catch (error) {
+      set({ authUser: null })
+      toast.error(error.response.data.message)
+    } finally{
+      set({ isloggingIn: false})
     }
   }
   
