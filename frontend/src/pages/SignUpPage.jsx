@@ -29,7 +29,7 @@ const SignUpPage = () => {
       {/* outer div w-f h-f to make items in center*/}
       <BorderAnimatedContainer className="overflow-hidden flex justify-center">
         <div /* actual signUp div */
-          className="bg-slate-900/80 w-[90vw] max-w-4xl md:w-[70vw] px-5 py-2 lg:p-2 rounded-xl flex flex-col md:flex-row min-h-[70vh] md:min-h-[40vw]"
+          className="bg-slate-900/80 w-[90vw] backdrop-blur-sm max-w-4xl md:w-[70vw] px-5 py-2 lg:p-2 rounded-xl flex flex-col md:flex-row min-h-[70vh] md:min-h-[40vw]"
         >
           {/* left side */}
           <div className="w-full md:w-1/2 h-full md:border-r border-slate-700/40 flex flex-col p-6 md:p-12">

@@ -22,7 +22,7 @@ const LoginPage = () => {
   return (
     <div className='absolute inset-0 w-full h-screen flex justify-center items-center p-6'>
         <BorderAnimatedContainer className='overflow-hidden'>
-          <div className="bg-slate-900/80 w-[90vw] max-w-4xl md:w-[70vw] px-5 py-2 lg:p-2 rounded-xl flex flex-col md:flex-row min-h-[70vh] md:min-h-[40vw]">
+          <div className="bg-slate-900/80 w-[90vw] backdrop-blur-sm max-w-4xl md:w-[70vw] px-5 py-2 lg:p-2 rounded-xl flex flex-col md:flex-row min-h-[70vh] md:min-h-[40vw]">
             {/* left section */}
             <div className='w-full md:w-1/2 border-slate-800/70 md:border-r px-10 py-22 h-full'>
               <div className='flex flex-col justify-center items-center gap-2 mb-6'>
