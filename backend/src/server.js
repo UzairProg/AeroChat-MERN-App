@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000; // what it does is, it gets the port numb
 import authRoutes from './routes/auth.route.js';
 import messageRoutes from './routes/message.route.js';
 
-app.use(express.json()); // what it does is, it adds middleware to parse incoming JSON requests.. for req.body to work
+app.use(express.json({ limit: '10mb' })); // what it does is, it adds middleware to parse incoming JSON requests.. for req.body to work
 
 // req,res means request and response.. it does is, it handles incoming requests and sends back responses
 app.get('/', (req, res) => { // what it does is, it defines a route for the root URL ('/') that responds with 'Hello World!' when accessed via a GET request

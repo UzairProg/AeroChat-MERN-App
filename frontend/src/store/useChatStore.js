@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
-export const useChatStore = create((set,get) => ({
+const useChatStore = create((set,get) => ({
     contacts: [],
     chats: [],
     isSoundEnabled: localStorage.getItem("isSoundEnabled") === true,
@@ -41,7 +41,8 @@ export const useChatStore = create((set,get) => ({
         try {
             set({ isUsersLoading: true })
             const fetchedChatPartners = await axiosInstance.get("/messages/chats")
-            set({ contacts: fetchedChatPartners.data })
+            console.log(fetchedChatPartners)
+            set({ chats: fetchedChatPartners.data })
         } catch (error) {
             toast.error(error.response.data.message)
         } finally{
@@ -49,3 +50,5 @@ export const useChatStore = create((set,get) => ({
         }
     }
 }))
+
+export default useChatStore

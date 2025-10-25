@@ -114,10 +114,10 @@ export const updateProfile = async (req, res) => {
         const uploadResponse = await cloudinary.uploader.upload(profilePic)
 
         if(!uploadResponse) return req.res.status(500).json({ message: "Image upload failed"})
-        
+        console.log(uploadResponse, uploadResponse.secure_url)
         const updateUser = await User.findByIdAndUpdate(
             user,
-            { profilePic: uploadResponse.secure_url },
+            { profilePicture: uploadResponse.secure_url },
             { new: true }
         ).select("-password")
         res.status(200).json(updateUser);

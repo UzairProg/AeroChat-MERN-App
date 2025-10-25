@@ -6,7 +6,7 @@ import ChatsList from '../components/ChatsList.jsx'
 import ContactList from '../components/ContactList.jsx'
 import NoConversationPlaceholder from '../components/NoConversationPlaceholder.jsx'
 import ChatContainer from '../components/ChatContainer.jsx'
-import {useChatStore} from "../store/useChatStore.js"
+import useChatStore from "../store/useChatStore.js"
 
 
 const ChatPage = () => {
@@ -20,7 +20,7 @@ const ChatPage = () => {
           {/* left: sidebar */}
           <div className='w-1/4 min-h-full bg-slate-800/50 backdrop-blur-sm'>
             <ProfileHeader />
-            <ActiveTabSwitch />
+            <ActiveTabSwitch className="w-full"/>
 
             <div className='flex-1 overflow-y-auto p-4 space-y-2'>
               {activeTab === "chats" ? <ChatsList /> : <ContactList />}
@@ -29,7 +29,7 @@ const ChatPage = () => {
 
           {/* right: chat box */}
           <div className='flex-1 flex flex-col backdrop-blur-sm bg-slate-900/50'>
-            {selectedUser ? <NoConversationPlaceholder /> : <ChatContainer />}
+            {selectedUser ? <ChatContainer /> : <NoConversationPlaceholder />}
           </div>
 
         </div>
