@@ -1,2 +1,72 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Define the keyframes animation */
+@keyframes border {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* Add the animation utility */
+.animate-border {
+  animation: border 4s linear infinite;
+}
+
+@theme {
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.input {
+  @apply w-full bg-slate-800/50 border border-slate-700 rounded-lg py-2 pl-10 pr-4 text-slate-200 placeholder-slate-400;
+  /* remove default outline and use a soft glow on focus while hiding the border */
+}
+
+.input:focus {
+  @apply outline-none border-transparent ring-2 ring-cyan-400/30;
+  box-shadow: none;
+}
+
+.auth-input-icon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 size-5;
+}
+
+/* when clicking the input container, ensure no hard border appears and icon color becomes accent */
+.relative:focus-within {
+  @apply ring-0 outline-none;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.relative:focus-within .auth-input-icon {
+  @apply text-cyan-300;
+}
+
+.auth-input-label {
+  @apply block text-sm font-medium text-slate-300 mb-2;
+}
+
+.auth-badge {
+  @apply inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-cyan-500/20 text-cyan-300;
+}
+
+.auth-btn {
+  /* premium gradient button with subtle lift on hover */
+  @apply w-full text-white rounded-lg py-2.5 font-medium transition-transform duration-200 ease-in-out
+    bg-linear-to-r from-cyan-500 to-indigo-600 shadow-md hover:shadow-xl focus:ring-2 focus:ring-cyan-500;
+}
+
+.auth-btn:hover {
+  @apply -translate-y-0.5;
+}
+
+.auth-link {
+  @apply px-4 py-2 inline-block bg-cyan-500/10 rounded-lg text-cyan-400
+  hover:text-cyan-500 text-sm transition-colors;
+}

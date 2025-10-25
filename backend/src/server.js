@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 dotenv.config();
 
 import connectDB from './lib/db.js';
@@ -8,7 +9,7 @@ import connectDB from './lib/db.js';
 const app = express();
 
 app.use(cookieParser()); // it adds middleware to parse cookies from incoming requests.. so that we can access them via req.cookies
-
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true })); // it adds middleware to enable CORS (Cross-Origin Resource Sharing) for all routes
 
 const PORT = process.env.PORT || 3000; // what it does is, it gets the port number from environment variables or defaults to 3000 if not set
 
