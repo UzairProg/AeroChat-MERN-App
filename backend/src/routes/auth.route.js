@@ -5,7 +5,7 @@ import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 
 const router = Router();
 
-router.use(arcjetProtection);
+// router.use(arcjetProtection);
 
 router.get('/test', (req, res) => {
     res.send("Auth route is working");
