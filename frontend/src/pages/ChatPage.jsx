@@ -52,7 +52,7 @@ const ChatPage = () => {
     <div className={`${isFullScreen ? 'fixed inset-0 z-50 w-full h-full' : 'absolute inset-0 w-full h-screen'} flex justify-center items-center ${isFullScreen ? 'p-0' : 'p-6'}`}>
       <BorderAnimatedContainer className={`overflow-hidden ${isFullScreen ? 'rounded-none h-full' : 'rounded-xl'}`}>
 
-  <div ref={wrapperRef} className={`${isFullScreen ? 'h-full w-full' : 'w-[94vw]'} premium-panel ${isFullScreen ? '' : 'max-w-6xl md:w-[80vw] md:max-w-5xl rounded-xl'} flex flex-col md:flex-row min-h-[75vh] md:min-h-[80vh]`}>
+  <div ref={wrapperRef} className={`${isFullScreen ? 'h-full w-full' : 'w-[94vw]'} premium-panel ${isFullScreen ? '' : 'max-w-6xl md:w-[80vw] md:max-w-5xl rounded-xl'} h-full flex flex-col md:flex-row min-h-[75vh] md:min-h-[80vh]`}>
 
           {/* Desktop-only floating fullscreen toggle (bottom-right) */}
           <button
@@ -78,7 +78,7 @@ const ChatPage = () => {
           </div>
 
           {/* right: chat box */}
-          <div className='flex-1 flex flex-col backdrop-blur-sm bg-slate-900/50'>
+          <div className='flex-1 flex flex-col h-full backdrop-blur-sm bg-slate-900/50'>
             {selectedUser ? <ChatContainer /> : <NoConversationPlaceholder />}
           </div>
 

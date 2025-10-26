@@ -4,7 +4,7 @@ function ActiveTabSwitch() {
   const { activeTab, setActiveTab } = useChatStore();
 
   return (
-    <div className="tabs tabs-boxed bg-transparent p-2 m-2 ">
+    <div className="tabs tabs-boxed bg-transparent p-2 m-2 mr-2 pr-6 md:pr-2">
       <button
         onClick={() => setActiveTab("chats")}
         className={`tab ${
