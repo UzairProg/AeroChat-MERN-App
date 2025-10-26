@@ -1,5 +1,5 @@
 import React from 'react'
-import { LogOutIcon, VolumeOffIcon, Volume2Icon } from "lucide-react";
+import { LogOutIcon, VolumeOffIcon, Volume2Icon, ArrowLeft, Maximize2, Minimize2 } from "lucide-react";
 import useAuthStore from '../store/useAuthStore.js'
 import useChatStore from '../store/useChatStore.js'
 import { useState } from 'react';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const ProfileHeader = () => {
   const { logout, authUser, updateProfile } = useAuthStore();
-  const { isSoundEnabled, toggleSound } = useChatStore();
+  const { isSoundEnabled, toggleSound, selectedUser, setSelectedUser, isFullScreen, toggleFullScreen } = useChatStore();
 
   const [selectedImg, setSelectedImg] = useState(null);
   const fileInputRef = React.useRef(null);
@@ -34,7 +34,17 @@ const ProfileHeader = () => {
         <div className='flex justify-center items-center'>
 
           <div className='flex gap-1 w-full justify-between items-center'>
-            <div className='flex gap-2'>
+              <div className='flex gap-2 items-center'>
+                {/* mobile back button when a conversation is open */}
+                {selectedUser && (
+                  <button
+                    onClick={() => setSelectedUser(null)}
+                    className="md:hidden mr-1 p-2 rounded-lg hover:bg-slate-700/30"
+                    aria-label="Back to chats"
+                  >
+                    <ArrowLeft className="w-4 h-4 text-slate-300" />
+                  </button>
+                )}
               
               <div className='w-14 h-14 avatar avatar-online rounded-full '>
                 <button
@@ -65,20 +75,32 @@ const ProfileHeader = () => {
               </div>
             </div>
             
-            <div className='flex gap-3'>
-            
-            <div onClick={logout} className='hover:text-red-500/60 cursor-pointer transition-colors duration-200'>
-              <LogOutIcon className='size-5'/>
-            </div>
-            
-            <div onClick={() => {
-              // play click sound before toggling
-              mouseClickSound.currentTime = 0; // reset to start
-              mouseClickSound.play().catch((error) => console.log("Audio play failed:", error));
-              toggleSound();
-            }} className='cursor-pointer hover:text-slate-300/60 transition-colors duration-200'>
-              {isSoundEnabled ? <Volume2Icon className='size-5'/> : <VolumeOffIcon className='size-5'/>}
-            </div>
+            <div className='flex gap-3 items-center'>
+              {/* Fullscreen toggle */}
+              <button
+                onClick={() => toggleFullScreen()}
+                className="p-2 rounded-lg hover:bg-slate-700/30 cursor-pointer transition-colors duration-200 md:hidden"
+                aria-label="Toggle fullscreen"
+              >
+                {isFullScreen ? (
+                  <Minimize2 className="w-5 h-5 text-slate-300" />
+                ) : (
+                  <Maximize2 className="w-5 h-5 text-slate-300" />
+                )}
+              </button>
+
+              <div onClick={logout} className='hover:text-red-500/60 cursor-pointer transition-colors duration-200 p-2 rounded-lg hover:bg-slate-700/30'>
+                <LogOutIcon className='w-5 h-5'/>
+              </div>
+
+              <div onClick={() => {
+                // play click sound before toggling
+                mouseClickSound.currentTime = 0; // reset to start
+                mouseClickSound.play().catch((error) => console.log("Audio play failed:", error));
+                toggleSound();
+              }} className='cursor-pointer hover:text-slate-300/60 transition-colors duration-200 p-2 rounded-lg hover:bg-slate-700/30'>
+                {isSoundEnabled ? <Volume2Icon className='w-5 h-5'/> : <VolumeOffIcon className='w-5 h-5'/>}
+              </div>
 
             </div>
 

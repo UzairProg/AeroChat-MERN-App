@@ -30,7 +30,7 @@ const useAuthStore = create((set) => ({
       toast.success("Account created successfully!")
     } catch (error) {
       set({ authUser: null })
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message || "Signup failed, please try again.")
     } finally{
       set({ isSigningUp: false})
     }
@@ -45,7 +45,7 @@ const useAuthStore = create((set) => ({
       toast.success("Logged in successfully!")
     } catch (error) {
       set({ authUser: null })
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message || "Login failed, please try again.")
     } finally{
       set({ isloggingIn: false})
     }
@@ -55,9 +55,15 @@ const useAuthStore = create((set) => ({
     try {
       set({ islogginOut: true })
       await axiosInstance.post("/auth/logout")
+      // clear client-side auth state and redirect to login
+      set({ authUser: null, isAuthenticatedCheck: false })
       toast.success("Logged out successfully")
+      // small delay so toast is visible before redirect
+      setTimeout(() => {
+        window.location.href = '/login'
+      }, 300)
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message || "Logout failed, Something went wrong.")
     } finally{
       set({ islogginOut: false })
     }
@@ -69,7 +75,7 @@ const useAuthStore = create((set) => ({
       set({ authUser: res.data })
       toast.success("Profile updated successfully")
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message || "Profile update failed, please try again.")
     }
   },
 

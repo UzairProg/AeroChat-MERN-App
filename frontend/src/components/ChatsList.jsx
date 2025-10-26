@@ -5,11 +5,11 @@ import NoChatsFound from './NoChatsFound.jsx';
 import UsersLoadingSkeleton from './UsersLoadingSkeleton.jsx';
 
 const ChatsList = () => {
-  const { getMyChatPartners, chats, isUsersLoading, setSelectedUser } = useChatStore();
+  const { getMyChatPartners, chats, isUsersLoading, setSelectedUser, activeTab } = useChatStore();
 
   useEffect(() => {
     getMyChatPartners();
-  }, [getMyChatPartners]);
+  }, [activeTab]);
 
   if (isUsersLoading) return <UsersLoadingSkeleton />;
   if (chats.length === 0) return <NoChatsFound />;
